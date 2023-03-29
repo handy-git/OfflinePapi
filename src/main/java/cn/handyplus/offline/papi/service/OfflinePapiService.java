@@ -46,13 +46,13 @@ public class OfflinePapiService {
     /**
      * 根据玩家名查询
      *
-     * @param playerUuid 玩家uid
+     * @param playerName 玩家名称
      * @param papi       变量
      * @return 数据
      */
-    public OfflinePapiEnter findByPlayerUuidAndPapi(String playerUuid, String papi) {
+    public OfflinePapiEnter findByPlayerUuidAndPapi(String playerName, String papi) {
         Db<OfflinePapiEnter> use = Db.use(OfflinePapiEnter.class);
-        use.where().eq(OfflinePapiEnter::getPlayerUuid, playerUuid)
+        use.where().eq(OfflinePapiEnter::getPlayerName, playerName)
                 .eq(OfflinePapiEnter::getPapi, papi);
         return use.execution().selectOne();
     }

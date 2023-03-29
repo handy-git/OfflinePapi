@@ -40,10 +40,16 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         if (player == null) {
             return null;
         }
-        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(player.getUniqueId().toString(), "%" + placeholder + "%");
+        String[] placeholderStr = placeholder.split("_");
+        if (placeholderStr.length < 2) {
+            return "";
+        }
+        String playerName = placeholderStr[0];
+        String papi = placeholder.replace(playerName + "_", "");
+        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
         String value;
         if (offlinePapiEnter == null) {
-            value = PlaceholderApiUtil.set(player, "%" + placeholder + "%");
+            value = PlaceholderApiUtil.set(player, "%" + papi + "%");
         } else {
             value = offlinePapiEnter.getVault();
         }

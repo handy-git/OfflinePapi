@@ -13,6 +13,6 @@ msg: true
 
 # 要保存的下来的变量
 # 例如你在config中配置了变量 %playerTitle_number%
-# 需要使用 %offlinePapi_playerTitle_number% 就可以获取到离线版本的变量
+# 需要使用 %offlinePapi_玩家名称_playerTitle_number% 就可以获取到离线版本的变量
 papi:
   - "%playerTitle_number%"

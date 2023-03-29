@@ -11,4 +11,4 @@
 
 例如你在config中配置了变量 %playerTitle_number%
 
-只需要使用 %offlinePapi_playerTitle_number% 就可以获取到离线版本的变量
+只需要使用 %offlinePapi_玩家名_playerTitle_number% 就可以获取到玩家离线版本的变量
