@@ -2,7 +2,9 @@ package cn.handyplus.offline.papi;
 
 import cn.handyplus.lib.InitApi;
 import cn.handyplus.lib.api.MessageApi;
+import cn.handyplus.lib.constants.BaseConstants;
 import cn.handyplus.lib.util.SqlManagerUtil;
+import cn.handyplus.offline.papi.constants.OfflineConstants;
 import cn.handyplus.offline.papi.hook.PlaceholderUtil;
 import cn.handyplus.offline.papi.job.PapiDataJob;
 import cn.handyplus.offline.papi.util.ConfigUtil;
@@ -27,7 +29,9 @@ public class OfflinePapi extends JavaPlugin {
         // 加载Placeholder
         new PlaceholderUtil(this).register();
         initApi.initCommand("cn.handyplus.offline.papi.command")
-                .enableSql("cn.handyplus.offline.papi.enter");
+                .initListener("cn.handyplus.offline.papi.listener")
+                .enableSql("cn.handyplus.offline.papi.enter")
+                .checkVersion(ConfigUtil.CONFIG.getBoolean(BaseConstants.IS_CHECK_UPDATE), OfflineConstants.PLUGIN_VERSION_URL);
 
         // 初始化定时任务
         PapiDataJob.init();

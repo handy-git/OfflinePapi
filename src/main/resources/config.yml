@@ -1,3 +1,9 @@
+# 是否开启更新提醒,建议开启(Whether to turn on update alerts, recommended)
+isCheckUpdate: true
+
+# op登录时候是否发送更新提醒(Whether to send update alerts when op logs in)
+isCheckUpdateToOpMsg: true
+
 # 第一次使用请等待5分钟拉取数据
 # 多久异步同步一次数据并刷新排行榜 单位秒(改动需重启生效)
 task: 300
