@@ -4,6 +4,7 @@ import cn.handyplus.offline.papi.OfflinePapi;
 import cn.handyplus.offline.papi.enter.OfflinePapiEnter;
 import cn.handyplus.offline.papi.service.OfflinePapiService;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 /**
@@ -49,7 +50,7 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
         String value;
         if (offlinePapiEnter == null) {
-            value = PlaceholderApiUtil.set(player, "%" + papi + "%");
+            value = PlaceholderApiUtil.set(Bukkit.getOfflinePlayer(playerName), "%" + papi + "%");
         } else {
             value = offlinePapiEnter.getVault();
         }
