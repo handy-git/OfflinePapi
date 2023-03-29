@@ -1,0 +1,20 @@
+name: OfflinePapi
+main: cn.handyplus.offline.papi.OfflinePapi
+version: 1.0.0
+author: handy
+website: https://ricedoc.handyplus.cn
+api-version: 1.13
+depend: [ PlaceholderAPI ]
+description: 离线变量
+commands:
+  offlinePapi:
+    description: 离线变量
+    aliases: [ opapi ]
+permissions:
+  offlinePapi.*:
+    description: 离线变量
+    children:
+      offlinePapi.reload: true
+  offlinePapi.reload:
+    description: 重新加载配置
+    default: op

@@ -1,0 +1,12 @@
+# 第一次使用请等待5分钟拉取数据
+# 多久异步同步一次数据并刷新排行榜 单位秒(改动需重启生效)
+task: 300
+
+# 是否打印后台日志
+msg: true
+
+# 要保存的下来的变量
+# 例如你在config中配置了变量 %playerTitle_number%
+# 需要使用 %offlinePapi_playerTitle_number% 就可以获取到离线版本的变量
+papi:
+  - "%playerTitle_number%"
