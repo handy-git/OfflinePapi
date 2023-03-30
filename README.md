@@ -12,3 +12,9 @@
 例如你在config中配置了变量 %playerTitle_number%
 
 只需要使用 %offlinePapi_玩家名_playerTitle_number% 就可以获取到玩家离线版本的变量
+
+### 爱发电购买
+[爱发电](https://afdian.net/item/250e635cce3611eda09152540025c377)
+
+#### 如果你没有钱购买支持作者
+可以在这里下载[releases](https://github.com/handy-git/OfflinePapi/releases) 记得点个star支持下也很棒
