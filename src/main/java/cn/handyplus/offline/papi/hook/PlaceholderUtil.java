@@ -48,6 +48,10 @@ public class PlaceholderUtil extends PlaceholderExpansion {
             return "";
         }
         String playerName = placeholderStr[0];
+        // 如果是me查询自己
+        if ("me".equalsIgnoreCase(playerName)) {
+            playerName = player.getName();
+        }
         String papi = placeholder.replace(playerName + "_", "");
 
         String value;
