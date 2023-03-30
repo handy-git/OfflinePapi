@@ -1,11 +1,13 @@
 package cn.handyplus.offline.papi.hook;
 
+import cn.handyplus.lib.util.BaseUtil;
 import cn.handyplus.offline.papi.OfflinePapi;
 import cn.handyplus.offline.papi.enter.OfflinePapiEnter;
 import cn.handyplus.offline.papi.service.OfflinePapiService;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 /**
  * 变量扩展
@@ -47,8 +49,16 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         }
         String playerName = placeholderStr[0];
         String papi = placeholder.replace(playerName + "_", "");
-        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
+
         String value;
+        // 如果玩家在线.直接获取实时变量
+        Player onlinePlayer = BaseUtil.getOnlinePlayer(playerName);
+        if (onlinePlayer != null) {
+            value = PlaceholderApiUtil.set(onlinePlayer, "%" + papi + "%");
+            return plugin.getConfig().getString(placeholder, value);
+        }
+        // 玩家不在线在获取离线变量
+        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
         if (offlinePapiEnter == null) {
             value = PlaceholderApiUtil.set(Bukkit.getOfflinePlayer(playerName), "%" + papi + "%");
         } else {
