@@ -14,6 +14,8 @@
 只需要使用 %offlinePapi_玩家名_playerTitle_number% 就可以获取到玩家离线版本的变量  
 玩家名使用 me 表示查询自己
 
+![](https://bstats.org/signatures/bukkit/OfflinePapi.svg)
+
 ### 爱发电购买
 [爱发电](https://afdian.net/item/250e635cce3611eda09152540025c377)
 
