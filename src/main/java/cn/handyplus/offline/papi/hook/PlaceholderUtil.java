@@ -47,13 +47,14 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         if (placeholderStr.length < 2) {
             return "";
         }
+        // 获取玩家名
         String playerName = placeholderStr[0];
+        // 获取变量
+        String papi = placeholder.replace(playerName + "_", "");
         // 如果是me查询自己
         if ("me".equalsIgnoreCase(playerName)) {
             playerName = player.getName();
         }
-        String papi = placeholder.replace(playerName + "_", "");
-
         String value;
         // 如果玩家在线.直接获取实时变量
         Player onlinePlayer = BaseUtil.getOnlinePlayer(playerName);

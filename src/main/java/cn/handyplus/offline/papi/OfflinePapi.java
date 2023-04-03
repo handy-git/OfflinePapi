@@ -31,6 +31,7 @@ public class OfflinePapi extends JavaPlugin {
         initApi.initCommand("cn.handyplus.offline.papi.command")
                 .initListener("cn.handyplus.offline.papi.listener")
                 .enableSql("cn.handyplus.offline.papi.enter")
+                .addMetrics(18120)
                 .checkVersion(ConfigUtil.CONFIG.getBoolean(BaseConstants.IS_CHECK_UPDATE), OfflineConstants.PLUGIN_VERSION_URL);
 
         // 初始化定时任务

@@ -1,6 +1,6 @@
 name: OfflinePapi
 main: cn.handyplus.offline.papi.OfflinePapi
-version: 1.0.2
+version: 1.0.3
 author: handy
 website: https://github.com/handy-git/OfflinePapi/releases
 api-version: 1.13

@@ -6,13 +6,13 @@
 
     <groupId>cn.handyplus.offline.papi</groupId>
     <artifactId>OfflinePapi</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spigot-api.vesion>1.19.2-R0.1-SNAPSHOT</spigot-api.vesion>
-        <lombok.version>1.18.24</lombok.version>
-        <HandyLib.version>3.5.3</HandyLib.version>
+        <lombok.version>1.18.26</lombok.version>
+        <HandyLib.version>3.5.7</HandyLib.version>
         <placeholderapi.version>2.10.5</placeholderapi.version>
     </properties>
 
