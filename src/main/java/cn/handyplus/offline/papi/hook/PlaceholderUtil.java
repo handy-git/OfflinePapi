@@ -5,7 +5,6 @@ import cn.handyplus.offline.papi.OfflinePapi;
 import cn.handyplus.offline.papi.enter.OfflinePapiEnter;
 import cn.handyplus.offline.papi.service.OfflinePapiService;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -65,11 +64,9 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         // 玩家不在线在获取离线变量
         OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
         if (offlinePapiEnter == null) {
-            value = PlaceholderApiUtil.set(Bukkit.getOfflinePlayer(playerName), "%" + papi + "%");
-        } else {
-            value = offlinePapiEnter.getVault();
+            return null;
         }
-        return plugin.getConfig().getString(placeholder, value);
+        return offlinePapiEnter.getVault();
     }
 
     /**

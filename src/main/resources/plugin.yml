@@ -1,8 +1,8 @@
 name: OfflinePapi
 main: cn.handyplus.offline.papi.OfflinePapi
-version: 1.0.3
+version: 1.0.4
 author: handy
-website: https://github.com/handy-git/OfflinePapi/releases
+website: https://ricedoc.handyplus.cn/wiki/OfflinePapi/
 api-version: 1.13
 depend: [ PlaceholderAPI ]
 description: 离线变量
