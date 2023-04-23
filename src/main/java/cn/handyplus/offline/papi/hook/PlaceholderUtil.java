@@ -54,12 +54,10 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         if ("me".equalsIgnoreCase(playerName)) {
             playerName = player.getName();
         }
-        String value;
         // 如果玩家在线.直接获取实时变量
         Player onlinePlayer = BaseUtil.getOnlinePlayer(playerName);
         if (onlinePlayer != null) {
-            value = PlaceholderApiUtil.set(onlinePlayer, "%" + papi + "%");
-            return plugin.getConfig().getString(placeholder, value);
+            return PlaceholderApiUtil.set(onlinePlayer, "%" + papi + "%");
         }
         // 玩家不在线在获取离线变量
         OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
