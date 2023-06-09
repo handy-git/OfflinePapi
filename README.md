@@ -21,3 +21,7 @@
 
 #### 如果你没有钱购买支持作者
 可以在这里下载[releases](https://github.com/handy-git/OfflinePapi/releases) 记得点个star支持下也很棒
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=handy-git/OfflinePapi&type=Date)](https://star-history.com/#handy-git/OfflinePapi&Date)
