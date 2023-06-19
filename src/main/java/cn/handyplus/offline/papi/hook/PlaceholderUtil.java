@@ -1,12 +1,18 @@
 package cn.handyplus.offline.papi.hook;
 
+import cn.handyplus.lib.core.CollUtil;
 import cn.handyplus.lib.util.BaseUtil;
 import cn.handyplus.offline.papi.OfflinePapi;
 import cn.handyplus.offline.papi.enter.OfflinePapiEnter;
+import cn.handyplus.offline.papi.param.OfflineParam;
 import cn.handyplus.offline.papi.service.OfflinePapiService;
+import cn.handyplus.offline.papi.util.ConfigUtil;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 变量扩展
@@ -42,29 +48,57 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         if (player == null) {
             return null;
         }
-        String[] placeholderStr = placeholder.split("_");
-        if (placeholderStr.length < 2) {
-            return "";
+        List<String> papiList = ConfigUtil.CONFIG.getStringList("papi");
+        if (CollUtil.isEmpty(papiList)) {
+            return null;
         }
-        // 获取玩家名
-        String playerName = placeholderStr[0];
-        // 获取变量
-        String papi = placeholder.replace(playerName + "_", "");
+        OfflineParam offlineParam = this.getOfflineParam(placeholder, 1, papiList);
+        if (offlineParam == null) {
+            return null;
+        }
         // 如果是me查询自己
-        if ("me".equalsIgnoreCase(playerName)) {
-            playerName = player.getName();
+        if ("me".equalsIgnoreCase(offlineParam.getPlayerName())) {
+            offlineParam.setPlayerName(player.getName());
         }
         // 如果玩家在线.直接获取实时变量
-        Player onlinePlayer = BaseUtil.getOnlinePlayer(playerName);
+        Player onlinePlayer = BaseUtil.getOnlinePlayer(offlineParam.getPlayerName());
         if (onlinePlayer != null) {
-            return PlaceholderApiUtil.set(onlinePlayer, "%" + papi + "%");
+            return PlaceholderApiUtil.set(onlinePlayer, offlineParam.getPapi());
         }
         // 玩家不在线在获取离线变量
-        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(playerName, "%" + papi + "%");
+        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(offlineParam.getPlayerName(), offlineParam.getPapi());
         if (offlinePapiEnter == null) {
             return null;
         }
         return offlinePapiEnter.getVault();
+    }
+
+    /**
+     * 获取变量信息
+     *
+     * @param placeholder 变量
+     * @param number      数量
+     * @param list        现有配置的变量
+     * @return OfflineParam
+     */
+    private OfflineParam getOfflineParam(String placeholder, int number, List<String> list) {
+        String playerName;
+        String[] placeholderStr = placeholder.split("_");
+        List<String> strList = new ArrayList<>();
+        for (int i = 0; i < number && number <= placeholderStr.length; i++) {
+            strList.add(placeholderStr[i]);
+        }
+        playerName = CollUtil.listToStr(strList, "_");
+        // 递归到尾直接返回null
+        if (playerName.equals(placeholder)) {
+            return null;
+        }
+        String papi = placeholder.replaceFirst(playerName + "_", "");
+        // 判断是否包含配置的变量,如果不包含递归处理下一个
+        if (!list.contains("%" + papi + "%")) {
+            return getOfflineParam(placeholder, number + 1, list);
+        }
+        return OfflineParam.builder().playerName(playerName).papi("%" + papi + "%").build();
     }
 
     /**
