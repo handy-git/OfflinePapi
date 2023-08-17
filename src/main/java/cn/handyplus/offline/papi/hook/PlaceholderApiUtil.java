@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,25 +28,7 @@ public class PlaceholderApiUtil {
         }
         // 是否包含变量
         if (PlaceholderAPI.containsPlaceholders(str)) {
-            return PlaceholderAPI.setPlaceholders(player, str);
-        }
-        return str;
-    }
-
-    /**
-     * 替换变量
-     *
-     * @param offlinePlayer 玩家
-     * @param str           字符串
-     * @return 新字符串
-     */
-    public static String set(OfflinePlayer offlinePlayer, String str) {
-        if (!OfflinePapi.USE_PAPI || offlinePlayer == null) {
-            return str;
-        }
-        // 是否包含变量
-        if (PlaceholderAPI.containsPlaceholders(str)) {
-            return PlaceholderAPI.setPlaceholders(offlinePlayer, str);
+            str = PlaceholderAPI.setPlaceholders(player, str);
         }
         return str;
     }
@@ -66,23 +47,9 @@ public class PlaceholderApiUtil {
         // 是否包含变量
         if (PlaceholderAPI.containsPlaceholders(str)) {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerUuid);
-            return PlaceholderAPI.setPlaceholders(offlinePlayer, str);
+            str = PlaceholderAPI.setPlaceholders(offlinePlayer, str);
         }
         return str;
-    }
-
-    /**
-     * 替换变量
-     *
-     * @param player  玩家
-     * @param strList 字符串集合
-     * @return 新字符串集合
-     */
-    public static List<String> set(Player player, List<String> strList) {
-        if (!OfflinePapi.USE_PAPI || player == null) {
-            return strList;
-        }
-        return PlaceholderAPI.setPlaceholders(player, strList);
     }
 
 }

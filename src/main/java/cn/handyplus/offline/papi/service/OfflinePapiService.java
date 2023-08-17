@@ -3,6 +3,8 @@ package cn.handyplus.offline.papi.service;
 import cn.handyplus.lib.db.Db;
 import cn.handyplus.offline.papi.enter.OfflinePapiEnter;
 
+import java.util.Optional;
+
 /**
  * 玩家papi数据
  *
@@ -26,8 +28,8 @@ public class OfflinePapiService {
      * @param enter 记录
      */
     public void saveOrUpdate(OfflinePapiEnter enter) {
-        OfflinePapiEnter offlinePapiEnter = this.findByPlayerUuidAndPapi(enter.getPlayerUuid(), enter.getPapi());
-        if (offlinePapiEnter == null) {
+        Optional<OfflinePapiEnter> offlinePapiEnterOptional = this.findByPlayerUuidAndPapi(enter.getPlayerUuid(), enter.getPapi());
+        if (!offlinePapiEnterOptional.isPresent()) {
             this.add(enter);
             return;
         }
@@ -50,7 +52,7 @@ public class OfflinePapiService {
      * @param papi       变量
      * @return 数据
      */
-    public OfflinePapiEnter findByPlayerUuidAndPapi(String playerName, String papi) {
+    public Optional<OfflinePapiEnter> findByPlayerUuidAndPapi(String playerName, String papi) {
         Db<OfflinePapiEnter> use = Db.use(OfflinePapiEnter.class);
         use.where().eq(OfflinePapiEnter::getPlayerName, playerName)
                 .eq(OfflinePapiEnter::getPapi, papi);

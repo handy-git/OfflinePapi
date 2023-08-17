@@ -1,9 +1,9 @@
 package cn.handyplus.offline.papi;
 
 import cn.handyplus.lib.InitApi;
-import cn.handyplus.lib.api.MessageApi;
 import cn.handyplus.lib.constants.BaseConstants;
-import cn.handyplus.lib.util.SqlManagerUtil;
+import cn.handyplus.lib.db.SqlManagerUtil;
+import cn.handyplus.lib.util.MessageUtil;
 import cn.handyplus.offline.papi.constants.OfflineConstants;
 import cn.handyplus.offline.papi.hook.PlaceholderUtil;
 import cn.handyplus.offline.papi.job.PapiDataJob;
@@ -37,16 +37,16 @@ public class OfflinePapi extends JavaPlugin {
         // 初始化定时任务
         PapiDataJob.init();
 
-        MessageApi.sendConsoleMessage(ChatColor.GREEN + "已成功载入服务器！");
-        MessageApi.sendConsoleMessage(ChatColor.GREEN + "Author:handy QQ群:1064982471");
+        MessageUtil.sendConsoleMessage(ChatColor.GREEN + "已成功载入服务器！");
+        MessageUtil.sendConsoleMessage(ChatColor.GREEN + "Author:handy QQ群:1064982471");
     }
 
     @Override
     public void onDisable() {
         // 关闭数据源
         SqlManagerUtil.getInstance().close();
-        MessageApi.sendConsoleMessage("§a已成功卸载！");
-        MessageApi.sendConsoleMessage("§aAuthor:handy QQ群:1064982471");
+        MessageUtil.sendConsoleMessage("§a已成功卸载！");
+        MessageUtil.sendConsoleMessage("§aAuthor:handy QQ群:1064982471");
     }
 
     public static OfflinePapi getInstance() {

@@ -1,28 +1,28 @@
 package cn.handyplus.offline.papi.command.admin;
 
 import cn.handyplus.lib.command.IHandyCommandEvent;
-import cn.handyplus.lib.util.MessageUtil;
 import cn.handyplus.offline.papi.OfflinePapi;
-import cn.handyplus.offline.papi.util.ConfigUtil;
+import cn.handyplus.offline.papi.job.PapiDataJob;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
- * 重载配置
+ * 初始化
  *
  * @author handy
+ * @since 1.0.7
  */
-public class ReloadCommand implements IHandyCommandEvent {
+public class InitCommand implements IHandyCommandEvent {
 
     @Override
     public String command() {
-        return "reload";
+        return "init";
     }
 
     @Override
     public String permission() {
-        return "offlinePapi.reload";
+        return "offlinePapi.init";
     }
 
     @Override
@@ -30,8 +30,8 @@ public class ReloadCommand implements IHandyCommandEvent {
         new BukkitRunnable() {
             @Override
             public void run() {
-                ConfigUtil.init();
-                MessageUtil.sendMessage(sender, "&a重载配置成功");
+                // 初始化离线玩家数据
+                PapiDataJob.getPapiDataJob(false);
             }
         }.runTaskAsynchronously(OfflinePapi.getInstance());
     }

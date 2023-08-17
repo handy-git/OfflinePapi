@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 变量扩展
@@ -61,16 +62,17 @@ public class PlaceholderUtil extends PlaceholderExpansion {
             offlineParam.setPlayerName(player.getName());
         }
         // 如果玩家在线.直接获取实时变量
-        Player onlinePlayer = BaseUtil.getOnlinePlayer(offlineParam.getPlayerName());
-        if (onlinePlayer != null) {
-            return PlaceholderApiUtil.set(onlinePlayer, offlineParam.getPapi());
+        Optional<Player> onlinePlayerOpt = BaseUtil.getOnlinePlayer(offlineParam.getPlayerName());
+        if (onlinePlayerOpt.isPresent()) {
+            String value = PlaceholderApiUtil.set(onlinePlayerOpt.get(), offlineParam.getPapi());
+            // 如果可以获取到的话就返回实时变量
+            if (!value.equals(offlineParam.getPapi())) {
+                return value;
+            }
         }
         // 玩家不在线在获取离线变量
-        OfflinePapiEnter offlinePapiEnter = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(offlineParam.getPlayerName(), offlineParam.getPapi());
-        if (offlinePapiEnter == null) {
-            return null;
-        }
-        return offlinePapiEnter.getVault();
+        Optional<OfflinePapiEnter> offlinePapiEnterOptional = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(offlineParam.getPlayerName(), offlineParam.getPapi());
+        return offlinePapiEnterOptional.map(OfflinePapiEnter::getVault).orElse(null);
     }
 
     /**
