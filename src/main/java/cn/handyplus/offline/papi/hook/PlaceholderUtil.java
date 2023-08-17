@@ -71,7 +71,7 @@ public class PlaceholderUtil extends PlaceholderExpansion {
             }
         }
         // 玩家不在线在获取离线变量
-        Optional<OfflinePapiEnter> offlinePapiEnterOptional = OfflinePapiService.getInstance().findByPlayerUuidAndPapi(offlineParam.getPlayerName(), offlineParam.getPapi());
+        Optional<OfflinePapiEnter> offlinePapiEnterOptional = OfflinePapiService.getInstance().findByPlayerNameAndPapi(offlineParam.getPlayerName(), offlineParam.getPapi());
         return offlinePapiEnterOptional.map(OfflinePapiEnter::getVault).orElse(null);
     }
 

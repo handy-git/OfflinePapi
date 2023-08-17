@@ -18,7 +18,7 @@ public enum TabListEnum {
     /**
      * 第一层提醒
      */
-    FIRST(Arrays.asList("reload"), 0, null, 1),
+    FIRST(Arrays.asList("reload", "init", "delete"), 0, null, 1),
 
     ;
 

@@ -48,11 +48,25 @@ public class OfflinePapiService {
     /**
      * 根据玩家名查询
      *
-     * @param playerName 玩家名称
+     * @param playerUuid 玩家Uid
      * @param papi       变量
      * @return 数据
      */
-    public Optional<OfflinePapiEnter> findByPlayerUuidAndPapi(String playerName, String papi) {
+    public Optional<OfflinePapiEnter> findByPlayerUuidAndPapi(String playerUuid, String papi) {
+        Db<OfflinePapiEnter> use = Db.use(OfflinePapiEnter.class);
+        use.where().eq(OfflinePapiEnter::getPlayerUuid, playerUuid)
+                .eq(OfflinePapiEnter::getPapi, papi);
+        return use.execution().selectOne();
+    }
+
+    /**
+     * 根据玩家名查询
+     *
+     * @param playerName 玩家名
+     * @param papi       变量
+     * @return 数据
+     */
+    public Optional<OfflinePapiEnter> findByPlayerNameAndPapi(String playerName, String papi) {
         Db<OfflinePapiEnter> use = Db.use(OfflinePapiEnter.class);
         use.where().eq(OfflinePapiEnter::getPlayerName, playerName)
                 .eq(OfflinePapiEnter::getPapi, papi);
@@ -66,10 +80,20 @@ public class OfflinePapiService {
      */
     private void update(OfflinePapiEnter enter) {
         Db<OfflinePapiEnter> use = Db.use(OfflinePapiEnter.class);
-        use.update().set(OfflinePapiEnter::getVault, enter.getVault());
+        use.update().set(OfflinePapiEnter::getVault, enter.getVault())
+                .set(OfflinePapiEnter::getPlayerName, enter.getPlayerName());
         use.where().eq(OfflinePapiEnter::getPlayerUuid, enter.getPlayerUuid())
                 .eq(OfflinePapiEnter::getPapi, enter.getPapi());
         use.execution().update();
+    }
+
+    /**
+     * 删除
+     *
+     * @since 1.0.7
+     */
+    public void delete() {
+        Db.use(OfflinePapiEnter.class).execution().delete();
     }
 
 }

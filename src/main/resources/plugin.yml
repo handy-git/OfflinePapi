@@ -16,9 +16,13 @@ permissions:
     children:
       offlinePapi.reload: true
       offlinePapi.init: true
+      offlinePapi.delete: true
   offlinePapi.reload:
     description: 重新加载配置
     default: op
   offlinePapi.init:
     description: 初始化
+    default: op
+  offlinePapi.delete:
+    description: 删除全部数据
     default: op
