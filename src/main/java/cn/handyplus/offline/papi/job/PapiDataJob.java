@@ -110,7 +110,7 @@ public class PapiDataJob {
      * @param playerUuid 玩家uid
      * @since 1.0.7
      */
-    public static void buildOfflinePapiEnter(List<String> papiList, String playerName, UUID playerUuid) {
+    private static void buildOfflinePapiEnter(List<String> papiList, String playerName, UUID playerUuid) {
         for (String papi : papiList) {
             OfflinePapiEnter offlinePapiEnter = new OfflinePapiEnter();
             offlinePapiEnter.setPlayerName(playerName);
@@ -118,6 +118,28 @@ public class PapiDataJob {
             offlinePapiEnter.setPapi(papi);
             // 判断值是否存在
             String papiValue = PlaceholderApiUtil.set(playerUuid, papi);
+            if (StrUtil.isEmpty(papiValue) || papiValue.equals(papi)) {
+                continue;
+            }
+            offlinePapiEnter.setVault(papiValue);
+            OfflinePapiService.getInstance().saveOrUpdate(offlinePapiEnter);
+        }
+    }
+
+    /**
+     * 构建数据
+     *
+     * @param papiList 变量列表
+     * @since 1.0.7
+     */
+    public static void buildPlayerPapiEnter(List<String> papiList, Player player) {
+        for (String papi : papiList) {
+            OfflinePapiEnter offlinePapiEnter = new OfflinePapiEnter();
+            offlinePapiEnter.setPlayerName(player.getName());
+            offlinePapiEnter.setPlayerUuid(player.getUniqueId().toString());
+            offlinePapiEnter.setPapi(papi);
+            // 判断值是否存在
+            String papiValue = PlaceholderApiUtil.set(player, papi);
             if (StrUtil.isEmpty(papiValue) || papiValue.equals(papi)) {
                 continue;
             }

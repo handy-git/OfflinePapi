@@ -2,7 +2,6 @@ package cn.handyplus.offline.papi.listener;
 
 import cn.handyplus.lib.annotation.HandyListener;
 import cn.handyplus.lib.core.CollUtil;
-import cn.handyplus.offline.papi.OfflinePapi;
 import cn.handyplus.offline.papi.job.PapiDataJob;
 import cn.handyplus.offline.papi.util.ConfigUtil;
 import org.bukkit.entity.Player;
@@ -10,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -53,12 +51,7 @@ public class PlayerQuitEventListener implements Listener {
         if (CollUtil.isEmpty(papiList)) {
             return;
         }
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                PapiDataJob.buildOfflinePapiEnter(papiList, player.getName(), player.getUniqueId());
-            }
-        }.runTaskAsynchronously(OfflinePapi.getInstance());
+        PapiDataJob.buildPlayerPapiEnter(papiList, player);
     }
 
 }
