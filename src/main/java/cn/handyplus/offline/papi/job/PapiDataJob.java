@@ -110,7 +110,7 @@ public class PapiDataJob {
      * @param playerUuid 玩家uid
      * @since 1.0.7
      */
-    private static void buildOfflinePapiEnter(List<String> papiList, String playerName, UUID playerUuid) {
+    public static void buildOfflinePapiEnter(List<String> papiList, String playerName, UUID playerUuid) {
         for (String papi : papiList) {
             OfflinePapiEnter offlinePapiEnter = new OfflinePapiEnter();
             offlinePapiEnter.setPlayerName(playerName);
