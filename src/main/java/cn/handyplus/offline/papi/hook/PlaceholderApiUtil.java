@@ -1,8 +1,9 @@
 package cn.handyplus.offline.papi.hook;
 
+import cn.handyplus.lib.core.StrUtil;
+import cn.handyplus.lib.util.BaseUtil;
 import cn.handyplus.offline.papi.OfflinePapi;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -23,7 +24,7 @@ public class PlaceholderApiUtil {
      * @return 新字符串
      */
     public static String set(Player player, String str) {
-        if (!OfflinePapi.USE_PAPI || player == null) {
+        if (!OfflinePapi.USE_PAPI || player == null || StrUtil.isEmpty(str)) {
             return str;
         }
         // 是否包含变量
@@ -41,12 +42,15 @@ public class PlaceholderApiUtil {
      * @return 新字符串
      */
     public static String set(UUID playerUuid, String str) {
-        if (!OfflinePapi.USE_PAPI || playerUuid == null) {
+        if (!OfflinePapi.USE_PAPI || playerUuid == null || StrUtil.isEmpty(str)) {
             return str;
         }
         // 是否包含变量
         if (PlaceholderAPI.containsPlaceholders(str)) {
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerUuid);
+            OfflinePlayer offlinePlayer = BaseUtil.getOfflinePlayer(playerUuid);
+            if (offlinePlayer == null) {
+                return str;
+            }
             str = PlaceholderAPI.setPlaceholders(offlinePlayer, str);
         }
         return str;
