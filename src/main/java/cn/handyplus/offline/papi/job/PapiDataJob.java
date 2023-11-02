@@ -111,6 +111,9 @@ public class PapiDataJob {
      * @since 1.0.7
      */
     private static void buildOfflinePapiEnter(List<String> papiList, String playerName, UUID playerUuid) {
+        if ("CMI-Fake-Operator".equalsIgnoreCase(playerName)) {
+            return;
+        }
         for (String papi : papiList) {
             OfflinePapiEnter offlinePapiEnter = new OfflinePapiEnter();
             offlinePapiEnter.setPlayerName(playerName);
