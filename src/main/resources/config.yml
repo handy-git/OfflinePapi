@@ -11,6 +11,9 @@ task: 300
 # 是否打印后台日志
 msg: true
 
+# 是否离线的时候进行同步数据(部分插件)
+quitSync: false
+
 # 要保存的下来的变量
 # 例如你在config中配置了变量 %playerTitle_number%
 # 需要使用 %offlinePapi_玩家名称_playerTitle_number% 就可以获取到离线版本的变量

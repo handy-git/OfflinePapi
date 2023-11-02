@@ -63,6 +63,9 @@ public class OfflinePapiCommand implements TabExecutor {
             return true;
         }
         List<String> helps = new ArrayList<>();
+        helps.add("&a/opapi reload &f- &a重载插件");
+        helps.add("&a/opapi init &f- &a初始化全部数据");
+        helps.add("&a/opapi delete &f- &a删除全部数据");
         for (String help : helps) {
             sender.sendMessage(BaseUtil.replaceChatColor(help));
         }

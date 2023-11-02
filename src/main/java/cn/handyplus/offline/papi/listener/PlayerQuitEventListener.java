@@ -6,6 +6,7 @@ import cn.handyplus.offline.papi.job.PapiDataJob;
 import cn.handyplus.offline.papi.util.ConfigUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -26,7 +27,7 @@ public class PlayerQuitEventListener implements Listener {
      *
      * @param event 事件
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onKick(PlayerKickEvent event) {
         this.getPapi(event.getPlayer());
     }
@@ -36,7 +37,7 @@ public class PlayerQuitEventListener implements Listener {
      *
      * @param event 事件
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent event) {
         this.getPapi(event.getPlayer());
     }
@@ -47,6 +48,10 @@ public class PlayerQuitEventListener implements Listener {
      * @param player 事件
      */
     private void getPapi(Player player) {
+        // 是否开启离线同步
+        if (!ConfigUtil.CONFIG.getBoolean("quitSync", false)) {
+            return;
+        }
         List<String> papiList = ConfigUtil.CONFIG.getStringList("papi");
         if (CollUtil.isEmpty(papiList)) {
             return;
