@@ -37,7 +37,7 @@ public class OfflinePapi extends JavaPlugin {
         PapiDataJob.init();
 
         MessageUtil.sendConsoleMessage(ChatColor.GREEN + "已成功载入服务器！");
-        MessageUtil.sendConsoleMessage(ChatColor.GREEN + "Author:handy 使用文档: https://ricedoc.handyplus.cn/wiki/OfflinePapi");
+        MessageUtil.sendConsoleMessage(ChatColor.GREEN + "Author:handy 使用文档: https://ricedoc.handyplus.cn/wiki/OfflinePapi/README");
     }
 
     @Override
