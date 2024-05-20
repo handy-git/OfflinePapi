@@ -2,7 +2,6 @@ package cn.handyplus.offline.papi;
 
 import cn.handyplus.lib.InitApi;
 import cn.handyplus.lib.constants.BaseConstants;
-import cn.handyplus.lib.db.SqlManagerUtil;
 import cn.handyplus.lib.util.MessageUtil;
 import cn.handyplus.offline.papi.constants.OfflineConstants;
 import cn.handyplus.offline.papi.hook.PlaceholderUtil;
@@ -38,15 +37,12 @@ public class OfflinePapi extends JavaPlugin {
         PapiDataJob.init();
 
         MessageUtil.sendConsoleMessage(ChatColor.GREEN + "已成功载入服务器！");
-        MessageUtil.sendConsoleMessage(ChatColor.GREEN + "Author:handy QQ群:1064982471");
+        MessageUtil.sendConsoleMessage(ChatColor.GREEN + "Author:handy 使用文档: https://ricedoc.handyplus.cn/wiki/OfflinePapi");
     }
 
     @Override
     public void onDisable() {
-        // 关闭数据源
-        SqlManagerUtil.getInstance().close();
-        MessageUtil.sendConsoleMessage("§a已成功卸载！");
-        MessageUtil.sendConsoleMessage("§aAuthor:handy QQ群:1064982471");
+        InitApi.disable();
     }
 
     public static OfflinePapi getInstance() {

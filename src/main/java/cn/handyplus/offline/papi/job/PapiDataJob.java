@@ -2,8 +2,8 @@ package cn.handyplus.offline.papi.job;
 
 import cn.handyplus.lib.core.CollUtil;
 import cn.handyplus.lib.core.StrUtil;
+import cn.handyplus.lib.expand.adapter.HandySchedulerUtil;
 import cn.handyplus.lib.util.MessageUtil;
-import cn.handyplus.offline.papi.OfflinePapi;
 import cn.handyplus.offline.papi.enter.OfflinePapiEnter;
 import cn.handyplus.offline.papi.hook.PlaceholderApiUtil;
 import cn.handyplus.offline.papi.service.OfflinePapiService;
@@ -11,7 +11,6 @@ import cn.handyplus.offline.papi.util.ConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,12 +28,10 @@ public class PapiDataJob {
      * 30s后初始化定时任务
      */
     public static void init() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                getPapiDataJob(true);
-            }
-        }.runTaskTimerAsynchronously(OfflinePapi.getInstance(), 20 * 60, ConfigUtil.CONFIG.getLong("task", 300) * 20);
+        long task = ConfigUtil.CONFIG.getLong("task", 300);
+        HandySchedulerUtil.runTaskTimerAsynchronously(() -> {
+            getPapiDataJob(true);
+        }, 20 * 60, task * 20);
     }
 
     /**
