@@ -19,8 +19,13 @@ public class OfflineParam {
     private String playerName;
 
     /**
-     * 变量
+     * 变量 有%
      */
     private String papi;
+
+    /**
+     * 变量 无%
+     */
+    private String papiType;
 
 }

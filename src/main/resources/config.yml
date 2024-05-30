@@ -20,3 +20,7 @@ quitSync: false
 # 玩家名使用 me 表示查询自己
 papi:
   - "%playerTitle_number%"
+
+# 变量默认值 可自己无限添加（可选配置）格式 变量: 默认值
+defaultValue:
+  playerTitle_number: "1"

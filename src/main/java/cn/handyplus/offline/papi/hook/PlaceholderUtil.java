@@ -72,7 +72,8 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         }
         // 玩家不在线在获取离线变量
         Optional<OfflinePapiEnter> offlinePapiEnterOptional = OfflinePapiService.getInstance().findByPlayerNameAndPapi(offlineParam.getPlayerName(), offlineParam.getPapi());
-        return offlinePapiEnterOptional.map(OfflinePapiEnter::getVault).orElse(null);
+        String defaultValue = ConfigUtil.CONFIG.getString("defaultValue." + offlineParam.getPapiType());
+        return offlinePapiEnterOptional.map(OfflinePapiEnter::getVault).orElse(defaultValue);
     }
 
     /**
@@ -100,7 +101,7 @@ public class PlaceholderUtil extends PlaceholderExpansion {
         if (!list.contains("%" + papi + "%")) {
             return getOfflineParam(placeholder, number + 1, list);
         }
-        return OfflineParam.builder().playerName(playerName).papi("%" + papi + "%").build();
+        return OfflineParam.builder().playerName(playerName).papiType(papi).papi("%" + papi + "%").build();
     }
 
     /**
