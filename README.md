@@ -5,8 +5,11 @@
 如果本插件帮助到你，请帮忙右上角点个Star就对作者很大的支持了～
 
 使用教程: [点击查看](https://ricedoc.handyplus.cn/wiki/OfflinePapi/README/)  
-购买地址: [点击查看](https://afdian.net/item/250e635cce3611eda09152540025c377)  
-下载地址: [点击查看](https://github.com/handy-git/OfflinePapi/releases)
+购买地址: [点击查看](https://afdian.net/item/250e635cce3611eda09152540025c377)
+
+开发版本下载渠道:
+
+[GITHUB ACTIONS](https://github.com/handy-git/OfflinePapi/actions)
 
 购买后可获得售后服务，作者会指导使用，如未购买请自行查阅wiki了解如何使用
 
