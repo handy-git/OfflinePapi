@@ -1,11 +1,11 @@
 name: OfflinePapi
 main: cn.handyplus.offline.papi.OfflinePapi
-version: 1.1.9
+version: 1.2.0
 author: handy
 website: https://ricedoc.handyplus.cn/wiki/OfflinePapi/log
 api-version: 1.13
 depend: [ PlaceholderAPI ]
-softdepend: [ AuthMe,CatSeedLogin,OauthLogin ]
+softdepend: [ AuthMe, CatSeedLogin, OauthLogin ]
 description: 离线变量
 folia-supported: true
 commands:
