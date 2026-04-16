@@ -1,6 +1,6 @@
 name: OfflinePapi
 main: cn.handyplus.offline.papi.OfflinePapi
-version: 1.2.0
+version: 1.2.1
 author: handy
 website: https://ricedoc.handyplus.cn/wiki/OfflinePapi/log
 api-version: 1.13

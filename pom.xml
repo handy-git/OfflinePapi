@@ -6,15 +6,11 @@
 
     <groupId>cn.handyplus.offline.papi</groupId>
     <artifactId>OfflinePapi</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spigot-api.vesion>1.21.11-R0.1-SNAPSHOT</spigot-api.vesion>
-        <lombok.version>1.18.38</lombok.version>
-        <HandyLib.version>3.36.7</HandyLib.version>
-        <placeholderapi.version>2.11.7</placeholderapi.version>
-        <annotations.version>26.0.2</annotations.version>
+        <HandyLib.version>3.37.8</HandyLib.version>
     </properties>
 
     <dependencies>
@@ -22,32 +18,26 @@
             <groupId>cn.handyplus.lib</groupId>
             <artifactId>HandyLib</artifactId>
             <version>${HandyLib.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>${spigot-api.vesion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>${placeholderapi.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>${annotations.version}</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.handyplus.lib</groupId>
+                <artifactId>HandyBom</artifactId>
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -55,10 +45,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.44</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Xlint:-options</arg>
+                        <arg>-Xlint:-removal</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <!--将依赖的 jar 包打包到当前 jar 包-->
